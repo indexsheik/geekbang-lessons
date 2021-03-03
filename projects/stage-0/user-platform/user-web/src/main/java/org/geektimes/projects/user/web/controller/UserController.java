@@ -3,7 +3,7 @@ package org.geektimes.projects.user.web.controller;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.service.UserService;
 import org.geektimes.projects.user.service.impl.UserServiceImpl;
-import org.geektimes.web.mvc.controller.Controller;
+import org.geektimes.web.mvc.controller.PageController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ import javax.ws.rs.Path;
  * @since: 1.0.0
  */
 @Path("/user")
-public class UserController implements Controller {
+public class UserController implements PageController {
 
     private UserService userService;
 
