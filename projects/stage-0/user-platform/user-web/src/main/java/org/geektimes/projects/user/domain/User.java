@@ -1,11 +1,12 @@
 package org.geektimes.projects.user.domain;
 
-import java.util.Objects;
-
 /**
- * 用户领域对象
+ * 用户模型
  *
- * @since 1.0
+ * @author: Xiao Xuezhi
+ * @email: index.xiao@foxmail.com
+ * @date: 2021/3/1 10:02
+ * @since: 1.0.0
  */
 public class User {
 
@@ -59,27 +60,13 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber);
+    public User() {
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, password, email, phoneNumber);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+    public User(String name, String password, String email, String phoneNumber) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 }
