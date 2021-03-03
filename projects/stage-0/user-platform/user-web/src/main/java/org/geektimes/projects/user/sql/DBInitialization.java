@@ -2,7 +2,10 @@ package org.geektimes.projects.user.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * TODO
@@ -12,6 +15,8 @@ import java.sql.Statement;
  * @Version: 1.0
  */
 public class DBInitialization {
+
+    private static Logger logger = Logger.getLogger(DBInitialization.class.getName());
 
     public static final String DROP_USERS_TABLE_DDL_SQL = "DROP TABLE users";
 
@@ -30,15 +35,23 @@ public class DBInitialization {
             "('D','******','d@gmail.com','4') , " +
             "('E','******','e@gmail.com','5')";
 
-    public static void main(String[] args) throws Exception {
+    public static void init() throws SQLException {
         String databaseURL = "jdbc:derby:/db/user-platform;create=true";
         Connection connection = DriverManager.getConnection(databaseURL);
 
         Statement statement = connection.createStatement();
-        // 删除 users 表
-        System.out.println(statement.execute(DROP_USERS_TABLE_DDL_SQL)); // false
+        try {
+            // 删除 users 表
+            statement.execute(DROP_USERS_TABLE_DDL_SQL); // false
+        } catch (Exception e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+
         // 创建 users 表
-        System.out.println(statement.execute(CREATE_USERS_TABLE_DDL_SQL)); // false
-        System.out.println(statement.executeUpdate(INSERT_USER_DML_SQL));  // 5
+        statement.execute(CREATE_USERS_TABLE_DDL_SQL); // false
+    }
+
+    public static void main(String[] args) throws Exception {
+        DBInitialization.init();
     }
 }

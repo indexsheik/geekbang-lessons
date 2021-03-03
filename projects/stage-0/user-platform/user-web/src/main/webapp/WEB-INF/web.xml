@@ -60,6 +60,10 @@
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
 
+    <listener>
+        <listener-class>org.geektimes.projects.user.web.listener.DBConnectionInitializerListener</listener-class>
+    </listener>
+
 
     <jsp-config>
         <jsp-property-group>
