@@ -111,6 +111,7 @@ public class FrontControllerServlet extends HttpServlet {
         ServletContext servletContext = request.getServletContext();
 
         String requestURI = request.getRequestURI();
+        servletContext.log(String.format("request url: %s", requestURI));
         String httpMethod = request.getMethod();
 
         Controller controller = controllerMap.get(requestURI);

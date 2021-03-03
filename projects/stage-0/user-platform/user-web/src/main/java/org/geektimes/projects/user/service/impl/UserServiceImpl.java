@@ -2,7 +2,7 @@ package org.geektimes.projects.user.service.impl;
 
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.repository.UserRepository;
-import org.geektimes.projects.user.repository.impl.InMemoryUserRepository;
+import org.geektimes.projects.user.repository.impl.DatabaseUserRepository;
 import org.geektimes.projects.user.service.UserService;
 
 /**
@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     public UserServiceImpl() {
-        userRepository = new InMemoryUserRepository();
+        userRepository = new DatabaseUserRepository();
     }
 
     /**

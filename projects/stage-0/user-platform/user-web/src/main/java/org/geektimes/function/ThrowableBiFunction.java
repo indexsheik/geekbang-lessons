@@ -33,7 +33,7 @@ public interface ThrowableBiFunction<T, U, R> {
      * Executes {@link ThrowableBiFunction}
      *
      * @param t        the function argument
-     * @param function {@link ThrowableFunction}
+     * @param function {@link ThrowableBiFunction}
      * @param <T>      the source type
      * @param <R>      the return type
      * @return the result after execution

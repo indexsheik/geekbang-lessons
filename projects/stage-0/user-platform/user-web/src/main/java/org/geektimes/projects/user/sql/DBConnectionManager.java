@@ -5,16 +5,33 @@ import org.geektimes.projects.user.domain.User;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBConnectionManager {
 
+    private static Logger logger = Logger.getLogger(DBConnectionManager.class.getName());
+
     private Connection connection;
+
+    private static final String databaseURL = "jdbc:derby:/db/user-platform;create=true";
+
+    public DBConnectionManager(){
+        initConnection();
+    }
+
+    private void initConnection() {
+        try {
+            connection = DriverManager.getConnection(databaseURL);
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "db connect failed.");
+            throw new RuntimeException();
+        }
+    }
 
     public void setConnection(Connection connection) {
         this.connection = connection;
