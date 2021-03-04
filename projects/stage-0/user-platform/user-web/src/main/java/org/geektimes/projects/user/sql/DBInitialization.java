@@ -1,7 +1,6 @@
 package org.geektimes.projects.user.sql;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -36,8 +35,7 @@ public class DBInitialization {
             "('E','******','e@gmail.com','5')";
 
     public static void init() throws SQLException {
-        String databaseURL = "jdbc:derby:/db/user-platform;create=true";
-        Connection connection = DriverManager.getConnection(databaseURL);
+        Connection connection = DBConnectionManager.getInstance().getConnection();
 
         Statement statement = connection.createStatement();
 //        try {

@@ -23,7 +23,7 @@ public class DBQueryManager {
     private Connection connection;
 
     public DBQueryManager() {
-        connection = new DBConnectionManager().getConnection();
+        connection = DBConnectionManager.getInstance().getConnection();
     }
 
     public boolean execute(String sql, Consumer<Throwable> consumer, Object... args) {

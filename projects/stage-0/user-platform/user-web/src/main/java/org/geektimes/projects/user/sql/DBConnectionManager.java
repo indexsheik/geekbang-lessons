@@ -20,7 +20,13 @@ public class DBConnectionManager {
 
     private static final String databaseURL = "jdbc:derby:/db/user-platform;create=true";
 
-    public DBConnectionManager(){
+    private static DBConnectionManager instance = new DBConnectionManager();
+
+    public static DBConnectionManager getInstance(){
+        return instance;
+    }
+
+    private DBConnectionManager() {
         initConnection();
     }
 
@@ -28,7 +34,7 @@ public class DBConnectionManager {
         try {
             connection = DriverManager.getConnection(databaseURL);
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "db connect failed.");
+            logger.log(Level.SEVERE, String.format("db connect failed.%s", e.getMessage()));
             throw new RuntimeException();
         }
     }
