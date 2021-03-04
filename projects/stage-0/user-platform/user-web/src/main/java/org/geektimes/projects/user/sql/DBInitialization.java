@@ -40,15 +40,19 @@ public class DBInitialization {
         Connection connection = DriverManager.getConnection(databaseURL);
 
         Statement statement = connection.createStatement();
+//        try {
+//            // 删除 users 表
+//            statement.execute(DROP_USERS_TABLE_DDL_SQL); // false
+//        } catch (Exception e) {
+//            logger.log(Level.WARNING, e.getMessage());
+//        }
+
         try {
-            // 删除 users 表
-            statement.execute(DROP_USERS_TABLE_DDL_SQL); // false
+            // 创建 users 表
+            statement.execute(CREATE_USERS_TABLE_DDL_SQL); // false
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
         }
-
-        // 创建 users 表
-        statement.execute(CREATE_USERS_TABLE_DDL_SQL); // false
     }
 
     public static void main(String[] args) throws Exception {
