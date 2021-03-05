@@ -16,7 +16,7 @@ public class DBConnectionInitializerListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        logger.log(Level.INFO, "init db");
+        logger.log(Level.INFO, "ready to init db");
         try {
             DBInitialization.init();
         } catch (SQLException e) {

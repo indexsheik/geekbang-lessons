@@ -1,7 +1,9 @@
 package org.geektimes.projects.user.sql;
 
+import org.geektimes.projects.user.context.ComponentContext;
 import org.geektimes.projects.user.domain.User;
 
+import javax.sql.DataSource;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -18,11 +20,11 @@ public class DBConnectionManager {
 
     private Connection connection;
 
-    private static final String databaseURL = "jdbc:derby:/db/user-platform;create=true";
+//    private static final String databaseURL = "jdbc:derby:/db/user-platform;create=true";
 
     private static DBConnectionManager instance = new DBConnectionManager();
 
-    public static DBConnectionManager getInstance(){
+    public static DBConnectionManager getInstance() {
         return instance;
     }
 
@@ -32,7 +34,9 @@ public class DBConnectionManager {
 
     private void initConnection() {
         try {
-            connection = DriverManager.getConnection(databaseURL);
+//            connection = DriverManager.getConnection(databaseURL);
+            DataSource dataSource = ComponentContext.getInstance().getComponent("jdbc/UserPlatformDB");
+            connection = dataSource.getConnection();
         } catch (SQLException e) {
             logger.log(Level.SEVERE, String.format("db connect failed.%s", e.getMessage()));
             throw new RuntimeException();
