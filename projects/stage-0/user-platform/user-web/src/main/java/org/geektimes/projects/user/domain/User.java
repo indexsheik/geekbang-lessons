@@ -1,5 +1,14 @@
 package org.geektimes.projects.user.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
+
+import static javax.persistence.GenerationType.AUTO;
+
 /**
  * 用户模型
  *
@@ -8,17 +17,38 @@ package org.geektimes.projects.user.domain;
  * @date: 2021/3/1 10:02
  * @since: 1.0.0
  */
-public class User {
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = AUTO)
+    @NotNull
     private Long id;
 
+    @Column
     private String name;
 
+    @Column
+    @Max(32)
+    @Min(6)
     private String password;
 
+    @Column
     private String email;
 
+    @Column
     private String phoneNumber;
+
+    public User() {
+    }
+
+    public User(String name, String password, String email, String phoneNumber) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
 
     public Long getId() {
         return id;
@@ -60,13 +90,27 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public User() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber);
     }
 
-    public User(String name, String password, String email, String phoneNumber) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, password, email, phoneNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }
