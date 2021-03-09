@@ -1,5 +1,7 @@
 package org.geektimes.projects.user.sql;
 
+import org.geektimes.projects.user.context.ComponentContext;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -7,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * TODO
+ * db 初始化
  *
  * @Author: Xiao Xuezhi
  * @Date: 2021/3/3 23:06
@@ -16,8 +18,6 @@ import java.util.logging.Logger;
 public class DBInitialization {
 
     private static Logger logger = Logger.getLogger(DBInitialization.class.getName());
-
-    public static final String DROP_USERS_TABLE_DDL_SQL = "DROP TABLE users";
 
     public static final String CREATE_USERS_TABLE_DDL_SQL = "CREATE TABLE users(" +
             "id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
@@ -35,15 +35,12 @@ public class DBInitialization {
             "('E','******','e@gmail.com','5')";
 
     public static void init() throws SQLException {
-        Connection connection = DBConnectionManager.getInstance().getConnection();
+        DBConnectionManager dbConnectionManager = ComponentContext.getInstance()
+                .getComponent("bean/DBConnectionManager");
+        Connection connection = dbConnectionManager.getConnection();
+//        Connection connection = DBConnectionManager.getInstance().getConnection();
 
         Statement statement = connection.createStatement();
-//        try {
-//            // 删除 users 表
-//            statement.execute(DROP_USERS_TABLE_DDL_SQL); // false
-//        } catch (Exception e) {
-//            logger.log(Level.WARNING, e.getMessage());
-//        }
 
         try {
             // 创建 users 表

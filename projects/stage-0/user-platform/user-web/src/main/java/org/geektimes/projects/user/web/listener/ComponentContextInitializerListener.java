@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * 组件上下文初始化监听器
+ *
  * @author: Xiao Xuezhi
  * @email: index.xiao@foxmail.com
  * @date: 2021/3/5 11:05
