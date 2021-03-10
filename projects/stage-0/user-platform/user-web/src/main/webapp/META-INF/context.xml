@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-	<Resource name="jdbc/UserPlatformDB"
-              type="javax.sql.DataSource"  auth="Container"
-              description="Derby database for User Platform"
-              maxActive="100" maxIdle="30" maxWait="10000"
-              username="" password="" 
-              driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
-              url="jdbc:derby:/db/user-platform"/>
+<!--	<Resource name="jdbc/UserPlatformDB"-->
+<!--              type="org.apache.derby.jdbc.EmbeddedDataSource"  auth="Container"-->
+<!--              description="Derby database for User Platform"-->
+<!--              maxActive="100" maxIdle="30" maxWait="10000"-->
+<!--              username="" password=""-->
+<!--              driverClassName="org.apache.derby.jdbc.EmbeddedDriver"-->
+<!--              url="jdbc:derby:/db/user-platform;create=true"/>-->
+
+	<Resource name="bean/DataSourceManager" auth="Container"
+			  type="org.geektimes.projects.user.sql.DataSourceManager"
+			  databaseName="/db/user-platform"
+			  createDatabase="create"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
+	<Resource name="bean/DelegatingEntityManager" auth="Container"
+			  type="org.geektimes.projects.user.orm.jpa.DelegatingEntityManager"
+			  persistenceUnitName="emf"
+			  propertiesLocation="META-INF/jpa-datasource.properties"
+			  factory="org.apache.naming.factory.BeanFactory"/>
 
 	<Resource name="bean/DBConnectionManager" auth="Container"
 			  type="org.geektimes.projects.user.sql.DBConnectionManager"
@@ -20,14 +32,21 @@
 			  type="org.geektimes.projects.user.sql.DBQueryManager"
 			  factory="org.apache.naming.factory.BeanFactory"/>
 
+	<!-- Repository -->
 	<Resource name="bean/DatabaseUserRepository" auth="Container"
 			  type="org.geektimes.projects.user.repository.impl.DatabaseUserRepository"
 			  factory="org.apache.naming.factory.BeanFactory"/>
 
+	<Resource name="bean/InMemoryUserRepository" auth="Container"
+			  type="org.geektimes.projects.user.repository.impl.InMemoryUserRepository"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
+	<!-- Service -->
 	<Resource name="bean/UserServiceImpl" auth="Container"
 			  type="org.geektimes.projects.user.service.impl.UserServiceImpl"
 			  factory="org.apache.naming.factory.BeanFactory"/>
 
+	<!-- Controller -->
 	<Resource name="bean/UserController" auth="Container"
 			  type="org.geektimes.projects.user.web.controller.UserController"
 			  factory="org.apache.naming.factory.BeanFactory"/>

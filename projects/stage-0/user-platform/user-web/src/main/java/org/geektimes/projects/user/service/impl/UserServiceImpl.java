@@ -5,6 +5,7 @@ import org.geektimes.projects.user.repository.UserRepository;
 import org.geektimes.projects.user.service.UserService;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
 
 /**
  * 用户服务
@@ -19,6 +20,9 @@ public class UserServiceImpl implements UserService {
     @Resource(name = "bean/DatabaseUserRepository")
     private UserRepository userRepository;
 
+    @Resource(name = "bean/DelegatingEntityManager")
+    private EntityManager entityManager;
+
     /**
      * 注册
      *
@@ -27,7 +31,12 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean register(User user) {
-        return userRepository.save(user);
+        try {
+            entityManager.persist(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return true;
     }
 
     /**

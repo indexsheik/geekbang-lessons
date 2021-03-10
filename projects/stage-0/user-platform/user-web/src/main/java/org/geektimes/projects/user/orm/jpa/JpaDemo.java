@@ -1,4 +1,4 @@
-package org.geektimes.projects.user.demo;
+package org.geektimes.projects.user.orm.jpa;
 
 import org.apache.derby.jdbc.EmbeddedDataSource;
 import org.geektimes.projects.user.domain.User;
@@ -25,8 +25,8 @@ public class JpaDemo {
                 Persistence.createEntityManagerFactory("emf", getProperties());
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         User user = new User();
-        user.setName("小马哥");
-        user.setPassword("******");
+        user.setName("小马哥2");
+        user.setPassword("***6***");
         user.setEmail("mercyblitz@gmail.com");
         user.setPhoneNumber("123456789");
         EntityTransaction transaction = entityManager.getTransaction();

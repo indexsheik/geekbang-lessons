@@ -40,7 +40,14 @@ public class UserController implements PageController {
         String phoneNumber = request.getParameter("phoneNumber");
 
         User user = new User(name, password, email, phoneNumber);
-        boolean register = userService.register(user);
+        boolean register;
+        try {
+            register = userService.register(user);
+        } catch (Exception e) {
+            request.getSession().setAttribute("error", e.getMessage());
+            register = false;
+        }
+
         return register ? "success.jsp" : "error.jsp";
     }
 
