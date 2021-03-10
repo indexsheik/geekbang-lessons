@@ -1,9 +1,8 @@
 package org.geektimes.projects.user.sql;
 
-import org.geektimes.projects.user.context.ComponentContext;
-
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,30 +26,19 @@ public class DBInitialization {
             "phoneNumber VARCHAR(64) NOT NULL" +
             ")";
 
-    public static final String INSERT_USER_DML_SQL = "INSERT INTO users(name,password,email,phoneNumber) VALUES " +
-            "('A','******','a@gmail.com','1') , " +
-            "('B','******','b@gmail.com','2') , " +
-            "('C','******','c@gmail.com','3') , " +
-            "('D','******','d@gmail.com','4') , " +
-            "('E','******','e@gmail.com','5')";
+    @Resource(name = "bean/DBConnectionManager")
+    private DBConnectionManager dbConnectionManager;
 
-    public static void init() throws SQLException {
-        DBConnectionManager dbConnectionManager = ComponentContext.getInstance()
-                .getComponent("bean/DBConnectionManager");
+    @PostConstruct
+    public void init() {
         Connection connection = dbConnectionManager.getConnection();
-//        Connection connection = DBConnectionManager.getInstance().getConnection();
-
-        Statement statement = connection.createStatement();
 
         try {
+            Statement statement = connection.createStatement();
             // 创建 users 表
             statement.execute(CREATE_USERS_TABLE_DDL_SQL); // false
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        DBInitialization.init();
     }
 }

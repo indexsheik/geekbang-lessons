@@ -1,9 +1,10 @@
 package org.geektimes.projects.user.sql;
 
 import org.apache.commons.lang.ClassUtils;
-import org.geektimes.function.ThrowableFunction;
-import org.geektimes.projects.user.context.ComponentContext;
+import org.geektimes.ioc.core.function.ThrowableFunction;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,11 +24,12 @@ public class DBQueryManager {
 
     private Connection connection;
 
-    public DBQueryManager() {
-        DBConnectionManager dbConnectionManager = ComponentContext.getInstance()
-                .getComponent("bean/DBConnectionManager");
+    @Resource(name = "bean/DBConnectionManager")
+    private DBConnectionManager dbConnectionManager;
+
+    @PostConstruct
+    public void init() {
         connection = dbConnectionManager.getConnection();
-//        connection = DBConnectionManager.getInstance().getConnection();
     }
 
     public boolean execute(String sql, Consumer<Throwable> consumer, Object... args) {

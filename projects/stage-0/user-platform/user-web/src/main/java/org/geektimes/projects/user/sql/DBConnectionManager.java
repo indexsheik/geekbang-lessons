@@ -1,7 +1,8 @@
 package org.geektimes.projects.user.sql;
 
-import org.geektimes.projects.user.context.ComponentContext;
+import org.geektimes.ioc.core.context.ComponentContext;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,17 +15,8 @@ public class DBConnectionManager {
 
     private Connection connection;
 
-//    private static DBConnectionManager instance = new DBConnectionManager();
-//
-//    public static DBConnectionManager getInstance() {
-//        return instance;
-//    }
-
-    public DBConnectionManager() {
-        initConnection();
-    }
-
-    private void initConnection() {
+    @PostConstruct
+    public void initConnection() {
         try {
             DataSource dataSource = ComponentContext.getInstance().getComponent("jdbc/UserPlatformDB");
             connection = dataSource.getConnection();

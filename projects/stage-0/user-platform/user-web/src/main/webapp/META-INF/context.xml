@@ -12,4 +12,24 @@
 			  type="org.geektimes.projects.user.sql.DBConnectionManager"
 			  factory="org.apache.naming.factory.BeanFactory"/>
 
+	<Resource name="bean/DBInitialization" auth="Container"
+			  type="org.geektimes.projects.user.sql.DBInitialization"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
+	<Resource name="bean/DBQueryManager" auth="Container"
+			  type="org.geektimes.projects.user.sql.DBQueryManager"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
+	<Resource name="bean/DatabaseUserRepository" auth="Container"
+			  type="org.geektimes.projects.user.repository.impl.DatabaseUserRepository"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
+	<Resource name="bean/UserServiceImpl" auth="Container"
+			  type="org.geektimes.projects.user.service.impl.UserServiceImpl"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
+	<Resource name="bean/UserController" auth="Container"
+			  type="org.geektimes.projects.user.web.controller.UserController"
+			  factory="org.apache.naming.factory.BeanFactory"/>
+
 </Context>

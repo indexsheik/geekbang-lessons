@@ -2,8 +2,9 @@ package org.geektimes.projects.user.service.impl;
 
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.repository.UserRepository;
-import org.geektimes.projects.user.repository.impl.DatabaseUserRepository;
 import org.geektimes.projects.user.service.UserService;
+
+import javax.annotation.Resource;
 
 /**
  * 用户服务
@@ -15,11 +16,8 @@ import org.geektimes.projects.user.service.UserService;
  */
 public class UserServiceImpl implements UserService {
 
+    @Resource(name = "bean/DatabaseUserRepository")
     private UserRepository userRepository;
-
-    public UserServiceImpl() {
-        userRepository = new DatabaseUserRepository();
-    }
 
     /**
      * 注册

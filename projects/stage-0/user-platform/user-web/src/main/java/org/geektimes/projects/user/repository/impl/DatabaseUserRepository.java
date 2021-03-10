@@ -5,6 +5,7 @@ import org.geektimes.projects.user.repository.UserRepository;
 import org.geektimes.projects.user.sql.DBQueryManager;
 import org.geektimes.projects.user.sql.DBResultMapManager;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,11 +19,8 @@ public class DatabaseUserRepository implements UserRepository {
 
     private static Consumer<Throwable> COMMON_EXCEPTION_HANDLER = e -> logger.log(Level.SEVERE, e.getMessage());
 
+    @Resource(name = "bean/DBQueryManager")
     private DBQueryManager dbQueryManager;
-
-    public DatabaseUserRepository() {
-        dbQueryManager = new DBQueryManager();
-    }
 
     /**
      * 保存

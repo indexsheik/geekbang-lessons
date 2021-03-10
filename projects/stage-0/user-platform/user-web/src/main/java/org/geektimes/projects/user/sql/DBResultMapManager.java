@@ -1,6 +1,6 @@
 package org.geektimes.projects.user.sql;
 
-import org.geektimes.function.ThrowableBiFunction;
+import org.geektimes.ioc.core.function.ThrowableBiFunction;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;

@@ -3,25 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.geekbang.projects</groupId>
         <artifactId>user-platform</artifactId>
+        <groupId>org.geekbang.projects</groupId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>my-web-mvc</artifactId>
-    <name>My Web-MVC Framework ${revision}</name>
+    <artifactId>my-ioc-core</artifactId>
+    <name>My IOC core Framework ${revision}</name>
     <packaging>jar</packaging>
 
-
     <dependencies>
-        <dependency>
-            <groupId>org.geekbang.projects</groupId>
-            <artifactId>my-ioc-core</artifactId>
-            <version>${revision}</version>
-        </dependency>
-
         <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -39,5 +32,13 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 </project>

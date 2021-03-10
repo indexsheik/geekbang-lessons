@@ -1,6 +1,7 @@
 package org.geektimes.web.mvc.servlet;
 
 import org.apache.commons.lang.StringUtils;
+import org.geektimes.ioc.core.context.ComponentContext;
 import org.geektimes.web.mvc.RequestMethodInfo;
 import org.geektimes.web.mvc.controller.Controller;
 import org.geektimes.web.mvc.controller.PageController;
@@ -38,8 +39,11 @@ public class FrontControllerServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         ServletContext servletContext = config.getServletContext();
         servletContext.log("FrontControllerServlet init starting.");
-        ServiceLoader<Controller> serviceLoader = ServiceLoader.load(Controller.class);
-        for (Controller controller : serviceLoader) {
+
+        List<Controller> controllerList = ComponentContext.getInstance()
+                .getComponent(Controller.class);
+
+        for (Controller controller : controllerList) {
             String requestUrl = "";
             // 获取 Controller RequestMapping
             Path pathFormClass = controller.getClass().getAnnotation(Path.class);
