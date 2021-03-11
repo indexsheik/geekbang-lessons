@@ -1,7 +1,8 @@
 package org.geektimes.projects.user.sql;
 
+import org.geektimes.ioc.core.context.ComponentContext;
+
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,13 +15,14 @@ public class DBConnectionManager {
 
     private Connection connection;
 
-    @Resource(name = "bean/DataSourceManager")
-    private DataSourceManager dataSourceManager;
+//    @Resource(name = "bean/DataSourceManager")
+//    private DataSourceManager dataSourceManager;
 
     @PostConstruct
     public void initConnection() {
         try {
-            DataSource dataSource = dataSourceManager.getDataSource();
+//            DataSource dataSource = dataSourceManager.getDataSource();
+            DataSource dataSource = ComponentContext.getInstance().getComponent("jdbc/UserPlatformDB");
             connection = dataSource.getConnection();
         } catch (SQLException e) {
             logger.log(Level.SEVERE, String.format("db connect failed.%s", e.getMessage()));

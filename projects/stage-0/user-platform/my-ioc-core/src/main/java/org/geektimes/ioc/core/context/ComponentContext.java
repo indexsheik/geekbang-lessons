@@ -178,6 +178,7 @@ public class ComponentContext {
             try {
                 method.invoke(component);
             } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }

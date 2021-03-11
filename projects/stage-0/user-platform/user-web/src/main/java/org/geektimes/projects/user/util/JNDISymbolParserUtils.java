@@ -31,8 +31,8 @@ public class JNDISymbolParserUtils {
                 throw new RuntimeException(e);
             }
         } else {
-            // TODO
-            return str;
+            // TODO 其他情况暂时忽略
+            return ComponentContext.getInstance().getComponent(classPrefix);
         }
     }
 }
